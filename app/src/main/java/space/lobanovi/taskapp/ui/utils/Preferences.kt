@@ -63,4 +63,13 @@ class Preferences(context: Context) {
         return sharedPref.getString("date","").toString()
     }
 
+
+    fun isProfileShowed():Boolean{
+        return sharedPref.getBoolean("red",false)
+    }
+
+    fun setProfileShowed(isSnow:Boolean){
+        sharedPref.edit().putBoolean("red",isSnow).apply()
+    }
+
 }

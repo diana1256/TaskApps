@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import space.lobanovi.taskapp.R
 import space.lobanovi.taskapp.databinding.FragmentOnBoardPageBinding
 import space.lobanovi.taskapp.ui.notifications.onBoard.BoardAdapter.Companion.ON_BOARD
@@ -15,6 +16,7 @@ class OnBoardPageFragment(private var listenerSkip:() -> Unit,
                           private var listenerNext:() -> Unit  ) : Fragment() {
 
     private var binding: FragmentOnBoardPageBinding? = null
+    private var  auth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,9 +53,13 @@ class OnBoardPageFragment(private var listenerSkip:() -> Unit,
         }
 
         binding!!.btnStart.setOnClickListener{
-            findNavController().navigate(R.id.navigation_home)
-           space.lobanovi.taskapp.ui.utils.Preferences(requireContext()).setBoardingShowed(true)
+          if (auth.currentUser != null) {
+               findNavController().navigate(R.id.navigation_home)
+            }else{
+                findNavController().navigate(R.id.authFragment)
+                space.lobanovi.taskapp.ui.utils.Preferences(requireContext())
+                    .setBoardingShowed(true)
+        }
         }
     }
-
 }

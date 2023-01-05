@@ -5,21 +5,23 @@ import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.auth.FirebaseAuth
 import space.lobanovi.taskapp.databinding.ActivityMainBinding
 import space.lobanovi.taskapp.ui.utils.Preferences
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var  auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-        this.binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
@@ -37,17 +39,22 @@ class MainActivity : AppCompatActivity() {
                 R.id.authFragment
             )
         )
-        if (Preferences(applicationContext).isBoardingShowed())
-            navController.navigate(R.id.navigation_home)
-        else navController.navigate(R.id.onBoardFragment)
+       if(!Preferences(applicationContext).isBoardingShowed()) {
+            navController.navigate(R.id.onBoardFragment)
+        }else if (auth.currentUser == null) {
+           navController.navigate(R.id.authFragment)
+        }
 
-
-        //   navController.navigate(R.id.authFragment)
-
+        if (Preferences(applicationContext).isProfileShowed())
+            navController.navigate(R.id.authFragment)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        val list = setOf(R.id.newTaskFragment, R.id.onBoardFragment, R.id.authFragment)
+
+        val list = setOf(
+            R.id.newTaskFragment,
+            R.id.onBoardFragment,
+            R.id.authFragment)
         navController.addOnDestinationChangedListener { _, destination, _ ->
          if(list.contains(destination.id)){
              if (list.contains(destination.id)){

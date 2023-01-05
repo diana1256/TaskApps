@@ -29,7 +29,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/authFragment"
-        android:name="space.lobanovi.taskapp.auth.AuthFragment"
+        android:name="space.lobanovi.taskapp.ui.auth.AuthFragment"
         android:label="fragment_auth"
         tools:layout="@layout/fragment_auth" />
     <fragment
