@@ -1,6 +1,5 @@
 package space.lobanovi.taskapp.ui.profile
 
-
 import android.app.AlertDialog
 import android.net.Uri
 import android.os.Bundle
@@ -13,10 +12,10 @@ import androidx.navigation.fragment.findNavController
 import space.lobanovi.taskapp.R
 import space.lobanovi.taskapp.databinding.FragmentProfileBinding
 import space.lobanovi.taskapp.extenssion.loadImage
+import space.lobanovi.taskapp.ui.utils.Preferences
 
 class ProfileFragment : Fragment() {
-    private lateinit var preferences: space.lobanovi.taskapp.ui.utils.Preferences
-
+    private lateinit var preferences: Preferences
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
@@ -33,7 +32,8 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        preferences = space.lobanovi.taskapp.ui.utils.Preferences(requireContext())
+        preferences = Preferences(requireContext())
+
         _binding = FragmentProfileBinding.inflate(LayoutInflater.from(context), container, false)
         imageChooser()
         binding.imageView.loadImage(preferences.isProfile())
@@ -47,17 +47,20 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initListener() {
-        binding.btnRed.setOnClickListener{
+
+        binding.btnRed.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             builder.setMessage("Вы точно хотите выйти с акаунта?")
-            builder.setNeutralButton("Да"){ _, _ ->
+            builder.setNeutralButton("Да") { _, _ ->
                 findNavController().navigate(R.id.authFragment)
                 preferences.setProfileShowed(true)
             }
-            builder.setPositiveButton("Нет"){ o2, _ ->
+            builder.setPositiveButton("Нет") { o2, _ ->
                 o2.dismiss()
             }
-          builder.show()
+            builder.show()
+
+
         }
     }
 
@@ -85,4 +88,3 @@ class ProfileFragment : Fragment() {
         }
     }
 }
-
