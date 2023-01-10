@@ -2,7 +2,6 @@ package space.lobanovi.taskapp.ui.auth
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +16,7 @@ import space.lobanovi.taskapp.databinding.FragmentAuthBinding
 import space.lobanovi.taskapp.extenssion.snowToast
 import java.util.concurrent.TimeUnit
 
+@Suppress("ControlFlowWithEmptyBody")
 class AuthFragment : Fragment() {
     private lateinit var binding: FragmentAuthBinding
     private var  auth = FirebaseAuth.getInstance()
@@ -60,7 +60,6 @@ class AuthFragment : Fragment() {
 
               override fun onVerificationFailed(p0: FirebaseException) {
                   snowToast("Невышло  "+p0.message.toString())
-                  Log.d("ololo", "onVerificationFailed:"+p0.message.toString())
               }
 
               override fun onCodeSent(verificationCode: String, p1: PhoneAuthProvider.ForceResendingToken) {
@@ -68,9 +67,8 @@ class AuthFragment : Fragment() {
                   binding.etLayoutPhone.isVisible = false
                   binding.btnSend.isVisible = false
 
-                  binding.etLayoutCode.isVisible = true
+                  binding.linearLayout.isVisible = true
                   binding.btnConfirm.isVisible = true
-                  Log.d("ololo", "onCodeSent:$verificationCode")
                   super.onCodeSent(verificationCode, p1)
               }
 
@@ -83,7 +81,13 @@ class AuthFragment : Fragment() {
 
     }
     private fun sendCode(){
-        val credential = correctCode?.let { it1 -> PhoneAuthProvider.getCredential(it1, binding.etCode.text.toString()) }
+        val otp = "${binding.one.text}${
+            binding.two.text}${
+                binding.three.text}${
+                    binding.four.text}${
+                        binding.five.text}${
+                            binding.six.text}"
+        val credential = correctCode?.let { it1 -> PhoneAuthProvider.getCredential(it1, otp) }
 
         if (credential != null) {
             signInWithPhoneAuthCredential(credential)
@@ -96,13 +100,8 @@ class AuthFragment : Fragment() {
                 if (task.isSuccessful) {
                     findNavController().navigate(R.id.navigation_home)
                 } else {
-                    // Sign in failed, display a message and update the UI
-                    Log.w("opol", "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
-                        Log.d("asd", "signInWithPhoneAuthCredential: " + task.exception.toString())
                     }
-                    // Update UI
                 }
             }
     }

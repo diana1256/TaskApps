@@ -22,13 +22,14 @@
           android:id="@+id/btn_red"
           android:layout_width="80dp"
           android:layout_marginTop="10dp"
-          android:text="Выйти с акаунта"
-          android:textSize="9sp"
           android:layout_height="45dp"
+          android:text="Выход из аккунта"
+          android:textAllCaps="false"
+          android:textSize="8sp"
           android:layout_marginEnd="20dp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="parent"
-          android:backgroundTint="@color/red"/>
+          android:backgroundTint="@color/red" />
 
 
       <androidx.cardview.widget.CardView
@@ -58,6 +59,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:hint="@string/username"
+        android:textColorHint="@color/grey"
         android:layout_marginTop="20dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintTop_toBottomOf="@id/ground"
@@ -66,6 +68,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="350dp"
+            android:textColor="@color/grey"
             android:layout_height="wrap_content"
             android:id="@+id/edit_name"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -76,6 +79,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/email"
         android:layout_marginTop="8dp"
+        android:textColorHint="@color/grey"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintTop_toBottomOf="@id/et_layout_title"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,6 +87,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="350dp"
+            android:textColor="@color/grey"
             android:layout_height="wrap_content"
             android:id="@+id/email"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -94,12 +99,14 @@
         android:hint="@string/phone"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"
+        android:textColorHint="@color/grey"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintTop_toBottomOf="@id/et_layout_desc"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="350dp"
+            android:textColor="@color/grey"
             android:layout_height="wrap_content"
             android:inputType="textPhonetic"
             android:id="@+id/phone"/>
@@ -110,6 +117,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:hint="@string/gender"
+        android:textColorHint="@color/grey"
         android:layout_marginTop="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintTop_toBottomOf="@id/et_layout_data"
@@ -119,6 +127,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/grey"
             android:id="@+id/gender"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,6 +136,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:hint="@string/date_of_birth"
+        android:textColorHint="@color/grey"
         android:layout_marginTop="8dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintTop_toBottomOf="@id/et_layout"
@@ -135,6 +145,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="350dp"
+            android:textColor="@color/grey"
             android:layout_height="50dp"
             android:id="@+id/data"/>
     </com.google.android.material.textfield.TextInputLayout>

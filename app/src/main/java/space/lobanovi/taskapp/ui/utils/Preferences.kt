@@ -72,4 +72,6 @@ class Preferences(context: Context) {
         sharedPref.edit().putBoolean("red",isSnow).apply()
     }
 
+
+
 }
