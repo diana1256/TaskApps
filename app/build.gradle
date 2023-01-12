@@ -71,8 +71,8 @@ dependencies {
 // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:$room_version")
 
-    //OtpView
-
+    //sms_view
+    implementation "com.github.fraggjkee:sms-confirmation-view:1.7.1"
 
     //Lottie Animation
     def lottieVersion = "3.4.0"
